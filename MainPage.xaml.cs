@@ -10,6 +10,7 @@ namespace SoundPlayer
         private System.Timers.Timer _timer;
         private DateTime _currentTime;
         private CultureInfo _culture = new CultureInfo("en-US");
+        private bool _isPlaying;
 
         public MainPage(IAudioManager audioManager)
         {
@@ -22,6 +23,8 @@ namespace SoundPlayer
             UpdateTime();
 
             InitializeAndStartTimer();
+
+            _isPlaying = false;
         }
 
         private void InitializeAndStartTimer()
@@ -59,99 +62,107 @@ namespace SoundPlayer
 
         private async void OnTimeButtonClicked(object sender, EventArgs e)
         {
-            List<string> fileList = GetCurrentTimeFileList();
-            
-            foreach (string file in fileList)
+            if(_isPlaying == false)
             {
-                var player = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(file));
+                _isPlaying = true;
+                List<string> fileList = GetCurrentTimeFileList();
 
-                player.Play();
-                Thread.Sleep(200);
-
-                while (player.IsPlaying)
+                foreach (string file in fileList)
                 {
-                    Thread.Sleep(200);
-                }
+                    var player = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(file));
 
-                player.Dispose();
+                    player.Play();
+                    await Task.Delay(50);
+                    while (player.IsPlaying)
+                    {
+                        await Task.Delay(50);
+                    }
+
+                    player.Dispose();
+                }
+                _isPlaying = false;
             }
         }
 
         private async void OnInfoButtonClicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Alert", "You have been alerted", "OK");
+            await DisplayAlert("Information", "© Corinna Zwinge, 2024\nContact: corinna.zwinge@rwth-aachen.de\nApp Icon from: https://www.flaticon.com/free-icons/old-school", "OK");
         }
 
         private List<string> GetCurrentTimeFileList()
         {
             
             List<int> hoursAndMinutes = GetHoursAndMinutes();
+            int hour = hoursAndMinutes[0];
+            int nextHour = hour < 12 ? hour + 1 : 1;
+            int minute = hoursAndMinutes[1];
+
             List<string> CurrentTimeFileList = new List<string>();
 
             CurrentTimeFileList.Add("es_ist.m4a");
 
-            switch(hoursAndMinutes[1])
+            switch(minute)
             {
                 case 0:
-                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    CurrentTimeFileList.Add(hour + ".m4a");
                     CurrentTimeFileList.Add("uhr.m4a");
                     break;
                 case 1:
                     CurrentTimeFileList.Add("kurz.m4a");
                     CurrentTimeFileList.Add("nach.m4a");
-                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    CurrentTimeFileList.Add(hour + ".m4a");
                     break;
                 case 5:
                 case 10:
-                    CurrentTimeFileList.Add(hoursAndMinutes[1] + ".m4a");
+                    CurrentTimeFileList.Add(minute + ".m4a");
                     CurrentTimeFileList.Add("nach.m4a");
-                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    CurrentTimeFileList.Add(hour + ".m4a");
                     break;
                 case 15:
                     CurrentTimeFileList.Add("viertel.m4a");
                     CurrentTimeFileList.Add("nach.m4a");
-                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    CurrentTimeFileList.Add(hour + ".m4a");
                     break;
                 case 20:
                     CurrentTimeFileList.Add("zwanzig.m4a");
                     CurrentTimeFileList.Add("nach.m4a");
-                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    CurrentTimeFileList.Add(hour + ".m4a");
                     break;
                 case 25:
                     CurrentTimeFileList.Add("5.m4a");
                     CurrentTimeFileList.Add("vor.m4a");
                     CurrentTimeFileList.Add("halb.m4a");
-                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    CurrentTimeFileList.Add(nextHour + ".m4a");
                     break;
                 case 30:
                     CurrentTimeFileList.Add("halb.m4a");
-                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    CurrentTimeFileList.Add(nextHour + ".m4a");
                     break;
                 case 35:
                     CurrentTimeFileList.Add("5.m4a");
                     CurrentTimeFileList.Add("nach.m4a");
                     CurrentTimeFileList.Add("halb.m4a");
-                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    CurrentTimeFileList.Add(nextHour + ".m4a");
                     break;
                 case 40:
                     CurrentTimeFileList.Add("zwanzig.m4a");
                     CurrentTimeFileList.Add("vor.m4a");
-                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    CurrentTimeFileList.Add(nextHour + ".m4a");
                     break;
                 case 45:
                     CurrentTimeFileList.Add("viertel.m4a");
                     CurrentTimeFileList.Add("vor.m4a");
-                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    CurrentTimeFileList.Add(nextHour + ".m4a");
                     break;
                 case 50:
                     CurrentTimeFileList.Add("10.m4a");
                     CurrentTimeFileList.Add("vor.m4a");
-                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    CurrentTimeFileList.Add(nextHour + ".m4a");
                     break;
                 case 55:
                     CurrentTimeFileList.Add("5.m4a");
                     CurrentTimeFileList.Add("vor.m4a");
-                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    CurrentTimeFileList.Add(nextHour + ".m4a");
                     break;
                 default:
                     CurrentTimeFileList = new List<string>();
