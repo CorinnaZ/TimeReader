@@ -60,18 +60,21 @@ namespace SoundPlayer
         private async void OnTimeButtonClicked(object sender, EventArgs e)
         {
             List<string> fileList = GetCurrentTimeFileList();
-
-            var player = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("time1030.m4a"));
-
-            player.Play();
-            Thread.Sleep(200);
-
-            while (player.IsPlaying)
+            
+            foreach (string file in fileList)
             {
-                Thread.Sleep(200);
-            }
+                var player = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(file));
 
-            player.Dispose();
+                player.Play();
+                Thread.Sleep(200);
+
+                while (player.IsPlaying)
+                {
+                    Thread.Sleep(200);
+                }
+
+                player.Dispose();
+            }
         }
 
         private async void OnInfoButtonClicked(object sender, EventArgs e)
