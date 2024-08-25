@@ -1,0 +1,48 @@
+# Build Folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.csproj.user
+
+# Mono auto generated files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Application Insights
+ApplicationInsights.config
+
+# Auto generated VS Code files
+.vscode/
+
+# Local History for Visual Studio
+.vs/
+
+# NCrunch
+.ncrunchsolution
+
+# Coverlet Coverage Report
+coverage*
+
+# JetBrains Rider
+.idea/
+
+# Rider and Resharper Solution options
+*.sln.iml
+*.sln.dotSettings.user
+
+# built versions
+*.apk
