@@ -46,16 +46,13 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<!-- <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />-->
 		<MauiIcon Include="Resources\AppIcon\uhr.png" ForegroundFile="Resources\AppIcon\uhr.png" />
 
 		<!-- Splash Screen -->
-		<!-- <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />-->
 		<MauiSplashScreen Include="Resources\Splash\uhr.png" BaseSize="128,128" Color="#d3d3d3" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -64,7 +61,6 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 
 		<MauiAsset Include="Resources\Raw\AboutAssets.txt" />
-		<MauiAsset Include="Resources\Raw\time1030.m4a" />
 		<MauiAsset Include="Resources\Raw\es_ist.m4a" />
 		<MauiAsset Include="Resources\Raw\kurz.m4a" />
 		<MauiAsset Include="Resources\Raw\nach.m4a" />
@@ -94,6 +90,10 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.21" />
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.21" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="3.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\Images\" />
 	</ItemGroup>
 
 </Project>
