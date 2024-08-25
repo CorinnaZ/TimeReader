@@ -81,29 +81,102 @@ namespace SoundPlayer
 
         private List<string> GetCurrentTimeFileList()
         {
-            return GetHourAndMinuteFiles();
+            
+            List<int> hoursAndMinutes = GetHoursAndMinutes();
+            List<string> CurrentTimeFileList = new List<string>();
+
+            CurrentTimeFileList.Add("es_ist.m4a");
+
+            switch(hoursAndMinutes[1])
+            {
+                case 0:
+                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    CurrentTimeFileList.Add("uhr.m4a");
+                    break;
+                case 1:
+                    CurrentTimeFileList.Add("kurz.m4a");
+                    CurrentTimeFileList.Add("nach.m4a");
+                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    break;
+                case 5:
+                case 10:
+                    CurrentTimeFileList.Add(hoursAndMinutes[1] + ".m4a");
+                    CurrentTimeFileList.Add("nach.m4a");
+                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    break;
+                case 15:
+                    CurrentTimeFileList.Add("viertel.m4a");
+                    CurrentTimeFileList.Add("nach.m4a");
+                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    break;
+                case 20:
+                    CurrentTimeFileList.Add("zwanzig.m4a");
+                    CurrentTimeFileList.Add("nach.m4a");
+                    CurrentTimeFileList.Add(hoursAndMinutes[0] + ".m4a");
+                    break;
+                case 25:
+                    CurrentTimeFileList.Add("5.m4a");
+                    CurrentTimeFileList.Add("vor.m4a");
+                    CurrentTimeFileList.Add("halb.m4a");
+                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    break;
+                case 30:
+                    CurrentTimeFileList.Add("halb.m4a");
+                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    break;
+                case 35:
+                    CurrentTimeFileList.Add("5.m4a");
+                    CurrentTimeFileList.Add("nach.m4a");
+                    CurrentTimeFileList.Add("halb.m4a");
+                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    break;
+                case 40:
+                    CurrentTimeFileList.Add("zwanzig.m4a");
+                    CurrentTimeFileList.Add("vor.m4a");
+                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    break;
+                case 45:
+                    CurrentTimeFileList.Add("viertel.m4a");
+                    CurrentTimeFileList.Add("vor.m4a");
+                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    break;
+                case 50:
+                    CurrentTimeFileList.Add("10.m4a");
+                    CurrentTimeFileList.Add("vor.m4a");
+                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    break;
+                case 55:
+                    CurrentTimeFileList.Add("5.m4a");
+                    CurrentTimeFileList.Add("vor.m4a");
+                    CurrentTimeFileList.Add((hoursAndMinutes[0] + 1) + ".m4a");
+                    break;
+                default:
+                    CurrentTimeFileList = new List<string>();
+                    break;
+
+            }
+            
+            return CurrentTimeFileList;
         }
 
-        private List<string> GetHourAndMinuteFiles()
+        private List<int> GetHoursAndMinutes()
         {
-            string hour = _currentTime.ToString("hh", _culture) + ".m4a";
-            string minute = "";
-            int minuteNumber = Int32.Parse(_currentTime.ToString("mm", _culture));
-            if (minuteNumber == 0)
+            int hours = Int32.Parse(_currentTime.ToString("hh", _culture));
+            int minutes = Int32.Parse(_currentTime.ToString("mm", _culture));
+            if (minutes > 0 && minutes <= 4)
             {
-                minute += minuteNumber.ToString() + ".m4a";
-            }
-            else if (minuteNumber <= 4)
-            {
-                minute += "1.m4a";
+                minutes = 1;
             }
             else
             {
-                int tmp = minuteNumber / 5;
-                tmp *= 5;
-                minute += tmp + ".m4a";
+                minutes /= 5;
+                minutes *= 5;
             }
-            return new List<string> { hour, minute };
+            return new List<int>
+            {
+                hours,
+                minutes
+            };
         }
     }
 }

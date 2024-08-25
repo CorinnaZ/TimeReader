@@ -63,6 +63,27 @@
 
 		<MauiAsset Include="Resources\Raw\AboutAssets.txt" />
 		<MauiAsset Include="Resources\Raw\time1030.m4a" />
+		<MauiAsset Include="Resources\Raw\es_ist.m4a" />
+		<MauiAsset Include="Resources\Raw\kurz.m4a" />
+		<MauiAsset Include="Resources\Raw\nach.m4a" />
+		<MauiAsset Include="Resources\Raw\vor.m4a" />
+		<MauiAsset Include="Resources\Raw\halb.m4a" />
+		<MauiAsset Include="Resources\Raw\uhr.m4a" />
+		<MauiAsset Include="Resources\Raw\viertel.m4a" />
+		<MauiAsset Include="Resources\Raw\zwanzig.m4a" />
+		<MauiAsset Include="Resources\Raw\1.m4a" />
+		<MauiAsset Include="Resources\Raw\1s.m4a" />
+		<MauiAsset Include="Resources\Raw\2.m4a" />
+		<MauiAsset Include="Resources\Raw\3.m4a" />
+		<MauiAsset Include="Resources\Raw\4.m4a" />
+		<MauiAsset Include="Resources\Raw\5.m4a" />
+		<MauiAsset Include="Resources\Raw\6.m4a" />
+		<MauiAsset Include="Resources\Raw\7.m4a" />
+		<MauiAsset Include="Resources\Raw\8.m4a" />
+		<MauiAsset Include="Resources\Raw\9.m4a" />
+		<MauiAsset Include="Resources\Raw\10.m4a" />
+		<MauiAsset Include="Resources\Raw\11.m4a" />
+		<MauiAsset Include="Resources\Raw\12.m4a" />
 	</ItemGroup>
 
 	<ItemGroup>
